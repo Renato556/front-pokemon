@@ -6,8 +6,8 @@
 
 
 <script>
-  // import Pokemon from "/home/renatocrds/Desktop/Cursos/Treinamento Pokedex/front-pokemon/bff/src/main/gateway/client/pokemonClient.js"
+  import { getSinglePokemon } from "/home/renatocrds/Desktop/Cursos/Treinamento Pokedex/front-pokemon/bff/src/main/gateway/client/pokemonClient.js"
   
-  
+  getSinglePokemon("1")
 
 </script>
