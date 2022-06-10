@@ -6,8 +6,8 @@
 
 
 <script>
-  import { getSinglePokemon } from "/home/renatocrds/Desktop/Cursos/Treinamento Pokedex/front-pokemon/bff/src/main/gateway/client/pokemonClient.js"
+  import pokemonController from "../../../bff/src/main/gateway/http/pokemonController"
   
-  getSinglePokemon("1")
+  console.log(pokemonController.getSinglePokemon("3", "3", "3"))
 
 </script>
