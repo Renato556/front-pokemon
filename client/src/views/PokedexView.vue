@@ -1,18 +1,25 @@
 <template>
   <div class="home">
     <img alt="Pokemon logo" src="../assets/logo.png" height="120px">
-    <HelloWorld title="Pokedex VueJS"/>
+    <h1>Pokedex VueJS</h1>
+    <Pokedex/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Pokedex from '@/components/Pokedex.vue'
 
 export default {
   name: 'PokedexView',
   components: {
-    HelloWorld
+    Pokedex
   }
 }
 </script>
+
+<style>
+h1{
+  font-size: 3em;
+}
+</style>
