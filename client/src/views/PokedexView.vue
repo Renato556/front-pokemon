@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Pokemon logo" src="../assets/logo.png" height="120px">
-    <HelloWorld msg="Pokedex VueJS"/>
+    <HelloWorld title="Pokedex VueJS"/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'PokedexView',
   components: {
     HelloWorld
   }

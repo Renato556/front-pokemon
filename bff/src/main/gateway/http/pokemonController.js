@@ -21,15 +21,16 @@ function createPokemonList(data) {
     let imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
     for (const element of data) {
         let name = element.name
-        let image = imageUrl.replace('0', element.url.split('/')[6])
-        let pokemon = new PokemonList(name, image)
+        let id = element.url.split('/')[6]
+        let image = imageUrl.replace('0', id)
+        let pokemon = new PokemonList(id, name, image)
         pokemonList.push(pokemon)
     }
     return pokemonList
 }
 
 const pokemonController = {
-    getAllPokemon: async (req, res) => {
+    getAllPokemon: async (_req, res) => {
         const url = API + "all"
         const response = await axios.get(url)
         const pokemonList = createPokemonList(response.data['results'])
@@ -37,7 +38,7 @@ const pokemonController = {
         res.status(200).send(pokemonList)
     },
 
-    getSinglePokemon: async (req, res, nameOrId) => {
+    getSinglePokemon: async (_req, res, nameOrId) => {
         const url = API + nameOrId
         const response = await axios.get(url)
         const pokemon = createPokemon(response.data)
