@@ -42,16 +42,16 @@ export default {
     background: orange;
   }
   .pokemon-list{
-    width: 40.7%;
+    width: 53.4%;
     margin-left: auto;
     margin-right: auto;
   }
   .image{
-    width: 10em;
+    width: 13em;
   }
   .box{
-    height: 15em;
-    width: 15em;
+    height: 20em;
+    width: 20em;
     background-color: white;
     margin: 0.5em;
     cursor: pointer;
