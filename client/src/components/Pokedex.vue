@@ -1,11 +1,11 @@
 <template>
   <div class="pokemon-list">
-    <v-row v-for="col of rows" :key="col" class="pokemon-row">
+    <div v-for="col of rows" :key="col.id" class="pokemon-row">
       <div v-for="pokemon in col" :key="pokemon.id" class="box">
-        <img class="image" :src="pokemon.image" alt="">
+        <img class="image" :src="pokemon.image" alt="Pokemon image">
         <figcaption class="pokemon-name">{{ pokemon.name }}</figcaption>
       </div>
-    </v-row>
+    </div>
   </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
   }
   .pokemon-name{
     color: black;
+    text-transform: capitalize;
     font-size: 2em;
   }
 </style>

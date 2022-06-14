@@ -1,7 +1,7 @@
 <template>
    <div class="pokemon">
      <div class="image">
-       <img :src="pokemon.image" />
+       <img :src="pokemon.image"/>
      </div>
      <div class="name">
        {{ pokemon.name }}

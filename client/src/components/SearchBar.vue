@@ -1,9 +1,9 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <form class="search" action="action_page.php">
+        <form class="search">
             <input type="text" placeholder="Search about a pokemon using name or pokedex number" name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <button type="submit"><em class="fa fa-search"></em></button>
         </form>
         <figcaption class="instruction">Insira o nome ou numero do Pokemon em letras minúsculas</figcaption>
     </div>
@@ -25,8 +25,6 @@ form.search input[type=text] {
   background: #f1f1f1;
   filter: drop-shadow(0 0.5em 0.5rem rgba(0,0,0,0.3));
 }
-
-/* Style the submit button */
 form.search button {
   float: center;
   width: 3%;
@@ -35,9 +33,8 @@ form.search button {
   color: white;
   font-size: 30px;
   border: 0;
-  border-left: none; /* Prevent double borders */
+  border-left: none;
   cursor: pointer;
   color: black;
 }
-
 </style>
