@@ -1,37 +1,42 @@
 <template>
-   <div class="pokemon">
-     <div class="image">
-       <img :src="pokemon.image"/>
-     </div>
-     <div class="name">
-       {{ pokemon.name }}
-     </div>
-   </div>
-  </template>
-  <script>
-  import axios from "axios";
+  <div class="pokemon">
+    <div class="box" @click="showModal = true">
+      <img class="pokemon-image" :src="pokemon.image" alt="Pokemon image">
+      <figcaption class="pokemon-name">{{ pokemon.name }}</figcaption>
+    </div>
+    <PokemonModal v-show="showModal" @close-modal="showModal = false" :pokemon="pokemon"/>
+  </div>
+  
+</template>
 
-  export default {
-   name: "PokemonComponent",
-   data() {
-     return {
-       pokemon: {},
-     };
-   },
-   created() {
-     this.getPokemon();
-   },
-   methods: {
-     getPokemon() {
-       axios
-         .get("http://localhost:8082/api/pokemon/5")
-         .then((res) => {
-           this.pokemon = res.data;
-         })
-         .catch((error) => {
-           console.log(error);
-         });
-     },
-   },
-  };
-  </script>
+<script>
+import axios from "axios"
+import PokemonModal from './PokemonModal.vue'
+
+export default {
+    name: "PokemonComponent",
+    data() {
+        return {
+            pokemon: {},
+            showModal: false,
+        }
+    },
+    created() {
+        this.getPokemon()
+    },
+    methods: {
+        getPokemon() {
+            let idOrName = this.$route.query.search
+            axios
+                .get("http://localhost:8082/api/pokemon/" + idOrName)
+                .then((res) => {
+                this.pokemon = res.data
+            })
+                .catch((error) => {
+                console.log(error)
+            });
+        }
+    },
+    components: { PokemonModal }
+}
+</script>

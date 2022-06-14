@@ -1,7 +1,7 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <form class="search">
+        <form class="search" action="/pokemon">
             <input type="text" placeholder="Search about a pokemon using name or pokedex number" name="search">
             <button type="submit"><em class="fa fa-search"></em></button>
         </form>
@@ -33,7 +33,6 @@ form.search button {
   color: white;
   font-size: 30px;
   border: 0;
-  border-left: none;
   cursor: pointer;
   color: black;
 }
