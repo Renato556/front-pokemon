@@ -65,11 +65,11 @@ export default {
     margin: 0.5em;
     cursor: pointer;
     border-radius: 0.5rem;
-    filter: drop-shadow(0 0 0.5rem);
+    filter: drop-shadow(0 0.5em 0.5rem rgba(0,0,0,0.5));
     display: inline-block;
   }
   .pokemon-name{
     color: black;
-    font-size: 2.5em;
+    font-size: 2em;
   }
 </style>

@@ -1,26 +1,43 @@
 <template>
     <div>
-        <input type="text" class="search-bar" placeholder="Search about a pokemon using name or pokedex number">
-        <img class="search-button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png" alt="">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <form class="search" action="action_page.php">
+            <input type="text" placeholder="Search about a pokemon using name or pokedex number" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
         <figcaption class="instruction">Insira o nome ou numero do Pokemon em letras minúsculas</figcaption>
     </div>
 </template>
 
 <style>
-.search-bar{
-    width: 30em;
-    height: 50px;
-    font-size: 25px;
-    border-radius: 5px;
-    border: 0;
-}
 .instruction{
-    font-size: 30px;
-    align-content: flex-start;
+    font-size: 25px;
+    margin-bottom: 1em;
+    color: white;
 }
-.search-button{
-    height: 20px;
-    margin-left: 10px;
-    cursor: pointer;
+form.search input[type=text] {
+  padding: 15px;
+  font-size: 25px;
+  border: 0;
+  float: center;
+  width: 45%;
+  border-radius: 5px;
+  background: #f1f1f1;
+  filter: drop-shadow(0 0.5em 0.5rem rgba(0,0,0,0.3));
 }
+
+/* Style the submit button */
+form.search button {
+  float: center;
+  width: 3%;
+  padding: 10px;
+  background: transparent;
+  color: white;
+  font-size: 30px;
+  border: 0;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+  color: black;
+}
+
 </style>
