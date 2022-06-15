@@ -24,11 +24,11 @@ function createPokemon(data) {
 
 function createPokemonList(data) {
     let pokemonList = []
-    let imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+    const IMAGE_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
     for (const element of data) {
         let name = element.name.replace('-', ' ')
         let id = element.url.split('/')[6]
-        let image = imageUrl.replace('0', id)
+        let image = IMAGE_URL.replace('0', id)
         let pokemon = new PokemonList(id, name, image)
         pokemonList.push(pokemon)
     }
