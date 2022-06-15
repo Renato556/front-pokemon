@@ -4,13 +4,18 @@ const { default: axios } = require("axios")
 
 const API = "http://localhost:8081/pokemon/"
 
+function format(dataToFormat) {
+    return String(Number(dataToFormat)/10)
+}
+
 function createPokemon(data) {
-    let weight = String(Number(data.weight)/10) + ' kg'
+    let weight = format(data.weight) + ' kg'
+    let height = format(data.height) + ' m'
     return new Pokemon(
         data.name, 
         data.sprites.front_default, 
         data.base_experience + ' XP',
-        data.height + ' m', 
+        height, 
         weight, 
         data.types, 
         data.abilities
