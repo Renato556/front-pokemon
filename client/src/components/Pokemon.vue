@@ -1,7 +1,7 @@
 <template>
   <div class="pokemon">
     <div class="box" @click="showModal = true">
-      <img class="pokemon-image" :src="pokemon.image" alt="Pokemon image">
+      <img class="pokemon-image" :src="pokemon.image" alt="Pokemon não encontrado">
       <figcaption class="pokemon-name">{{ pokemon.name }}</figcaption>
     </div>
     <PokemonModal v-show="showModal" @close-modal="showModal = false" :pokemon="pokemon"/>
@@ -33,7 +33,7 @@ export default {
                 this.pokemon = res.data
             })
                 .catch((error) => {
-                console.log(error)
+                console.log(error.response.data)
             });
         }
     },

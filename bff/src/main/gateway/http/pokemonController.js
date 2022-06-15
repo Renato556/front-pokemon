@@ -42,9 +42,14 @@ const pokemonController = {
     getSinglePokemon: async (_req, res, nameOrId) => {
         const url = API + nameOrId
         const response = await axios.get(url)
-        const pokemon = createPokemon(response.data)
 
-        res.status(200).send(pokemon)
+        if (response.data.name) {
+            const pokemon = createPokemon(response.data)
+            res.status(200).send(pokemon)
+        }
+        else {
+            res.status(404).send("Pokemon not found")
+        }
     }
 }
 

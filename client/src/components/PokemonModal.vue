@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay" @click="$emit('close-modal')">
     <div class="modal" @click.stop>
-        <img class="pokemon-image" :src="pokemon.image" alt="Pokemon image">
+        <img class="pokemon-image" :src="pokemon.image" alt="Pokemon não encontrado">
         <figcaption class="pokemon-name">{{ pokemon.name }}</figcaption>
         <div class="pokemon-data">
             <em class="pokemon-title">Base Experience/Experiência</em>
@@ -94,7 +94,7 @@ button[data-result-val="fairy"] { background-color: #de94dc; }
 }
 .pokemon-stats {
     float: right;
-    margin-right: 15%;
+    margin-right: 17%;
     font-style: normal;
 }
 .type {
