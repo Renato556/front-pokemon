@@ -26,7 +26,7 @@ h1{
   cursor: pointer;
 }
 body{
-  background: #f3992c;
+  background-image: linear-gradient(to right, #e93418, #ed5415, 25%, #f79f2e, 75%, #ed5415, #e93418);
 }
 .pokemon{
   margin: auto;

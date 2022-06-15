@@ -25,23 +25,23 @@ export default {
         };
     },
     created() {
-        this.getPokemonList();
+        this.getPokemonList()
     },
     methods: {
         getPokemonList() {
             axios
                 .get("http://localhost:8082/api/pokemon/all")
                 .then((res) => {
-                this.pokemonList = res.data;
-                this.groupColumns(this.pokemonList);
+                this.pokemonList = res.data
+                this.groupColumns(this.pokemonList)
             })
                 .catch((error) => {
-                console.log(error);
+                console.log(error)
             });
         },
         groupColumns(pokemonList) {
             for (let i = 0; i < pokemonList.length; i += 3) {
-                this.rows.push(pokemonList.slice(i, i + 3));
+                this.rows.push(pokemonList.slice(i, i + 3))
             }
         },
         initializeModal(pokemonId) {
@@ -53,7 +53,7 @@ export default {
             })
                 .catch((error) => {
                 console.log(error)
-            });
+            })
         }
     },
     components: { PokemonModal }

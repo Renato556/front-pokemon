@@ -140,7 +140,6 @@ button[data-result-val="fairy"] { background-color: #de94dc; }
     margin-top: 30px;
     cursor: pointer;
     font-weight: bold;
-    float: center;
 }
 .pokemon-stats-title {
     margin-top: 5%;

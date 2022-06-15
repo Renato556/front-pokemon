@@ -11,9 +11,9 @@
 
 <style>
 .instruction{
-    font-size: 25px;
-    margin-bottom: 1em;
-    color: white;
+  font-size: 25px;
+  margin-bottom: 1em;
+  color: white;
 }
 form.search input[type=text] {
   padding: 15px;

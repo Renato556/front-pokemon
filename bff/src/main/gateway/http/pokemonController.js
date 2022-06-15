@@ -9,8 +9,8 @@ function format(dataToFormat, extension) {
 }
 
 function createPokemon(data) {
-    let weight = format(data.weight, 'kg')
-    let height = format(data.height, 'm')
+    let weight = format(data.weight, ' kg')
+    let height = format(data.height, ' m')
     return new Pokemon(
         data.name, 
         data.sprites.front_default, 
