@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import axios from "axios"
 import PokemonModal from './PokemonModal.vue'
+import pokemonApi from './gateways/pokemon.api';
 
 export default {
     name: "PokemonListComponent",
@@ -28,32 +28,22 @@ export default {
         this.getPokemonList()
     },
     methods: {
-        getPokemonList() {
-            axios
-                .get("http://localhost:8082/api/pokemon/all")
-                .then((res) => {
-                this.pokemonList = res.data
-                this.groupColumns(this.pokemonList)
-            })
-                .catch((error) => {
-                console.log(error)
-            });
+        async getPokemonList() {
+            const response = await pokemonApi.getPokemonList()
+            this.pokemonList = response.data
+            this.groupColumns(this.pokemonList)
         },
         groupColumns(pokemonList) {
-            for (let i = 0; i < pokemonList.length; i += 3) {
-                this.rows.push(pokemonList.slice(i, i + 3))
+            const POKEMONS_PER_ROW = 3
+            
+            for (let i = 0; i < pokemonList.length; i += POKEMONS_PER_ROW) {
+                this.rows.push(pokemonList.slice(i, i + POKEMONS_PER_ROW))
             }
         },
-        initializeModal(pokemonId) {
-            axios
-                .get("http://localhost:8082/api/pokemon/" + pokemonId)
-                .then((res) => {
-                this.pokemonData = res.data
-                this.showModal = true
-            })
-                .catch((error) => {
-                console.log(error)
-            })
+        async initializeModal(pokemonId) {
+            const response = await pokemonApi.getSinglePokemon(pokemonId)
+            this.pokemonData = response.data
+            this.showModal = true
         }
     },
     components: { PokemonModal }

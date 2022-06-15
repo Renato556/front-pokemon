@@ -6,12 +6,11 @@
     </div>
     <PokemonModal v-show="showModal" @close-modal="showModal = false" :pokemon="pokemon"/>
   </div>
-  
 </template>
 
 <script>
-import axios from "axios"
 import PokemonModal from './PokemonModal.vue'
+import pokemonApi from './gateways/pokemon.api'
 
 export default {
     name: "PokemonComponent",
@@ -25,16 +24,9 @@ export default {
         this.getPokemon()
     },
     methods: {
-        getPokemon() {
-            let idOrName = this.$route.query.search
-            axios
-                .get("http://localhost:8082/api/pokemon/" + idOrName)
-                .then((res) => {
-                this.pokemon = res.data
-            })
-                .catch((error) => {
-                console.log(error.response.data)
-            });
+        async getPokemon() {
+            const response = await pokemonApi.getSinglePokemon(this.$route.query.search)
+            this.pokemon = response.data
         }
     },
     components: { PokemonModal }

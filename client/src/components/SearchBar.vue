@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .instruction{
   font-size: 25px;
   margin-bottom: 1em;
