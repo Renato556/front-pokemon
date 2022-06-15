@@ -16,7 +16,7 @@
         <div>
             <em class="pokemon-stats-title">Pokemon Types/Tipo</em>
             <div class="types">
-                <button class="type" v-for="tipo in pokemon.types" :key="tipo.id">{{ tipo.type.name }}</button>
+                <button class="type" :data-result-val="tipo.type.name" v-for="tipo in pokemon.types" :key="tipo.id">{{ tipo.type.name }}</button>
             </div>
         </div>
         <div>
@@ -39,6 +39,25 @@
 </script>
 
 <style scoped>
+
+button[data-result-val="normal"] { background-color: #a9a879; }
+button[data-result-val="bug"] { background-color: #a8bb15; }
+button[data-result-val="fighting"] { background-color: #bd3226; }
+button[data-result-val="ghost"] { background-color: #715996; }
+button[data-result-val="electric"] { background-color: #f6d230; }
+button[data-result-val="flying"] { background-color: #a88ff3; }
+button[data-result-val="steel"] { background-color: #b8b8d0; }
+button[data-result-val="psychic"] { background-color: #f85888; }
+button[data-result-val="poison"] { background-color: #9f3fa0; }
+button[data-result-val="fire"] { background-color: #f07f2f; }
+button[data-result-val="ice"] { background-color: #98d8d8; }
+button[data-result-val="ground"] { background-color: #dec162; }
+button[data-result-val="water"] { background-color: #6991e7; }
+button[data-result-val="dragon"] { background-color: #6e39ed; }
+button[data-result-val="rock"] { background-color: #b4a339; }
+button[data-result-val="grass"] { background-color: #75ca4f; }
+button[data-result-val="dark"] { background-color: #6f5848; }
+button[data-result-val="fairy"] { background-color: #de94dc; }
 
 .modal-overlay {
   position: fixed;
@@ -89,6 +108,7 @@
     text-transform: capitalize;
     margin-right: 20px;
     font-weight: bold;
+    float: right;
 }
 .ability {
     background-color: white;
@@ -102,6 +122,8 @@
     text-transform: capitalize;
     margin-right: 20px;
     font-weight: bold;
+    float: left;
+    margin-top: 3px;
 }
 .types {
     float: left;
@@ -109,15 +131,16 @@
 }
 .close {
     background-color: #e2978c;
-    width: 150px;
+    width: 70%;
     height: 40px;
     color: white;
     font-size: 14px;
     border-radius: 5px;
     border: 0;
-    margin-top: 50px;
+    margin-top: 30px;
     cursor: pointer;
     font-weight: bold;
+    float: center;
 }
 .pokemon-stats-title {
     margin-top: 5%;

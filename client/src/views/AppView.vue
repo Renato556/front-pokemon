@@ -26,7 +26,7 @@ h1{
   cursor: pointer;
 }
 body{
-  background: orange;
+  background: #f3992c;
 }
 .pokemon{
   margin: auto;

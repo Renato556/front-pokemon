@@ -15,11 +15,6 @@ export default {
   components: {
     Pokemon,
     AppView
-  },
-  data() {
-    return {
-      showModal: false,
-    }
   }
 }
 </script>
