@@ -5,7 +5,7 @@
         <figcaption class="pokemon-name">{{ pokemon.name }}</figcaption>
         <div class="pokemon-data">
             <em class="pokemon-title">Base Experience/Experiência</em>
-            <em class="pokemon-stats">{{ pokemon.xp }}</em>
+            <em class="pokemon-stats">{{ pokemon.baseExperience }}</em>
             <br>
             <em class="pokemon-title">Height/Altura</em>  
             <em class="pokemon-stats">{{ pokemon.height }}</em>

@@ -1,56 +1,21 @@
-const Pokemon = require("../../domain/pokemon")
-const PokemonList = require("../../domain/pokemonList")
 const { default: axios } = require("axios")
 
 const API = "http://localhost:8081/pokemon/"
-
-function format(dataToFormat, extension) {
-    return String(Number(dataToFormat)/10) + extension
-}
-
-function createPokemon(data) {
-    let weight = format(data.weight, ' kg')
-    let height = format(data.height, ' m')
-    return new Pokemon(
-        data.name, 
-        data.sprites.front_default, 
-        data.base_experience + ' XP',
-        height, 
-        weight, 
-        data.types, 
-        data.abilities
-    )
-}
-
-function createPokemonList(data) {
-    let pokemonList = []
-    const IMAGE_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-    for (const element of data) {
-        let name = element.name.replace('-', ' ')
-        let id = element.url.split('/')[6]
-        let image = IMAGE_URL.replace('0', id)
-        let pokemon = new PokemonList(id, name, image)
-        pokemonList.push(pokemon)
-    }
-    return pokemonList
-}
 
 const pokemonController = {
     getAllPokemon: async (_req, res) => {
         const url = API + "all"
         const response = await axios.get(url)
-        const pokemonList = createPokemonList(response.data['results'])
 
-        res.status(200).send(pokemonList)
+        res.status(200).send(response.data)
     },
 
     getSinglePokemon: async (_req, res, nameOrId) => {
         const url = API + nameOrId
         const response = await axios.get(url)
 
-        if (response.data.name) {
-            const pokemon = createPokemon(response.data)
-            res.status(200).send(pokemon)
+        if (response.status === 200) {
+            res.status(200).send(response.data)
         }
         else {
             res.status(404).send("Pokemon not found")
