@@ -12,7 +12,7 @@
 
 <script>
 import PokemonModal from './PokemonModal.vue'
-import pokemonApi from './gateways/pokemon.api';
+import pokemonApi from '../gateways/pokemon.api'
 
 export default {
     name: "PokemonListComponent",
@@ -41,7 +41,7 @@ export default {
             }
         },
         async initializeModal(pokemonId) {
-            const response = await pokemonApi.getSinglePokemon(pokemonId)
+            const response = await pokemonApi.getOnePokemon(pokemonId)
             this.pokemonData = response.data
             this.showModal = true
         }

@@ -10,16 +10,13 @@ const pokemonController = {
         res.status(200).send(response.data)
     },
 
-    getSinglePokemon: async (_req, res, nameOrId) => {
+    getOnePokemon: async (_req, res, nameOrId) => {
         const url = API + nameOrId
         const response = await axios.get(url)
-
-        if (response.status === 200) {
-            res.status(200).send(response.data)
-        }
-        else {
+        .catch(() => {
             res.status(404).send("Pokemon not found")
-        }
+        })
+        res.status(200).send(response.data)
     }
 }
 

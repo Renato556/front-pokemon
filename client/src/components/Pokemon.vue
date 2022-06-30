@@ -10,7 +10,7 @@
 
 <script>
 import PokemonModal from './PokemonModal.vue'
-import pokemonApi from './gateways/pokemon.api'
+import pokemonApi from '../gateways/pokemon.api'
 
 export default {
     name: "PokemonComponent",
@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         async getPokemon() {
-            const response = await pokemonApi.getSinglePokemon(this.$route.query.search)
+            const response = await pokemonApi.getOnePokemon(this.$route.query.search)
             this.pokemon = response.data
         }
     },
