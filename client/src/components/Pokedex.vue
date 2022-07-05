@@ -15,22 +15,21 @@ import PokemonModal from './PokemonModal.vue'
 import pokemonApi from '../gateways/pokemon.api'
 
 export default {
-    name: "PokemonListComponent",
+    name: "PokedexComponent",
     data() {
         return {
             pokemonList: {},
             rows: [],
             showModal: false,
             pokemonData: {}
-        };
+        }
     },
     created() {
         this.getPokemonList()
     },
     methods: {
         async getPokemonList() {
-            const response = await pokemonApi.getPokemonList()
-            this.pokemonList = response.data
+            this.pokemonList = (await pokemonApi.getPokemonList()).data
             this.groupColumns(this.pokemonList)
         },
         groupColumns(pokemonList) {
@@ -41,8 +40,7 @@ export default {
             }
         },
         async initializeModal(pokemonId) {
-            const response = await pokemonApi.getOnePokemon(pokemonId)
-            this.pokemonData = response.data
+            this.pokemonData = (await pokemonApi.getOnePokemon(pokemonId)).data
             this.showModal = true
         }
     },

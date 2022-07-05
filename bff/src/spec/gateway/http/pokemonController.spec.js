@@ -27,7 +27,7 @@ describe('Given pokemonController', () => {
         })
 
         it('Then axios.get is called', () => {
-            expect(axios.get).toHaveBeenCalledWith(API + "all")
+            expect(axios.get).toHaveBeenCalledWith(API + 'all')
         })
 
         it('Then res.status is called', () => {

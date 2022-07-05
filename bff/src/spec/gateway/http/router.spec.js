@@ -7,9 +7,9 @@ jest.mock('../../../main/gateway/http/pokemonController', () => (mockPokemonCont
 const router = require('../../../main/gateway/http/router')
 
 const findRoute = (mockRoutes, routeName, callbackIndex = 1, middlewareIndex = 1) => {
-    const call = mockRoutes.mock.calls.find(c => c[0].toString() === routeName.toString());
-    return { name: call[0], callback: call[callbackIndex], middleware: call[middlewareIndex] };
-};
+    const call = mockRoutes.mock.calls.find(c => c[0].toString() === routeName.toString())
+    return { name: call[0], callback: call[callbackIndex], middleware: call[middlewareIndex] }
+}
 
 describe('Given router is called', () => {
     let mockContext
@@ -22,6 +22,7 @@ describe('Given router is called', () => {
     const res = {}
 
     beforeEach(() => {
+        jest.clearAllMocks()
         mockContext = {
             get: jest.fn()
         }

@@ -3,11 +3,11 @@ import axios from 'axios'
 const API = "http://localhost:8082/api/pokemon/"
 
 const pokemonApi = {
-    getPokemonList() {
-        return axios.get(API + "all")
+    async getPokemonList() {
+        return await axios.get(API + "all")
     },
-    getOnePokemon(nameOrId) {
-        return axios.get(API + nameOrId)
+    async getOnePokemon(nameOrId) {
+        return await axios.get(API + nameOrId)
     }
 }
 

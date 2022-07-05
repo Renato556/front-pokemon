@@ -13,22 +13,21 @@ import PokemonModal from './PokemonModal.vue'
 import pokemonApi from '../gateways/pokemon.api'
 
 export default {
-    name: "PokemonComponent",
-    data() {
-        return {
-            pokemon: {},
-            showModal: false,
-        }
-    },
-    created() {
-        this.getPokemon()
-    },
-    methods: {
-        async getPokemon() {
-            const response = await pokemonApi.getOnePokemon(this.$route.query.search)
-            this.pokemon = response.data
-        }
-    },
-    components: { PokemonModal }
+  name: "PokemonComponent",
+  data() {
+    return {
+      pokemon: {},
+      showModal: false,
+    }
+  },
+  created() {
+    this.getPokemon()
+  },
+  methods: {
+    async getPokemon() {
+      this.pokemon = (await pokemonApi.getOnePokemon(this.$route.query.search)).data
+    }
+  },
+  components: { PokemonModal }
 }
 </script>
