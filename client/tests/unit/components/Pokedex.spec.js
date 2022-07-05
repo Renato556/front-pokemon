@@ -61,7 +61,7 @@ describe('Pokedex', () => {
             groupColumns: jest.fn()
         }
 
-        beforeEach(async () => {
+        beforeEach(() => {
             Pokedex.methods.getPokemonList.call(context)
         })
 
