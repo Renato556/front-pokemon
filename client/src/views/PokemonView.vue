@@ -11,7 +11,7 @@ import Pokemon from '@/components/Pokemon.vue'
 import AppView from './AppView.vue'
 
 export default {
-  name: 'PokedexView',
+  name: 'PokemonView',
   components: {
     Pokemon,
     AppView

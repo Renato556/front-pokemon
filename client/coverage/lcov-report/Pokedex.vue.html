@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Pokemon.vue</title>
+    <title>Code coverage report for Pokedex.vue</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Pokemon.vue</h1>
+        <h1><a href="index.html">All files</a> Pokedex.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -106,7 +106,37 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,19 +180,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;div class="pokemon"&gt;
-    &lt;div class="box" @click="showModal = true"&gt;
-      &lt;img
-        class="pokemon-image"
-        :src="pokemon.image"
-        alt="Pokemon não encontrado"
-      /&gt;
-      &lt;figcaption class="pokemon-name"&gt;{{ pokemon.name }}&lt;/figcaption&gt;
+  &lt;div class="pokemon-list"&gt;
+    &lt;div v-for="col of rows" :key="col.id" class="pokemon-row"&gt;
+      &lt;div
+        v-for="pokemon in col"
+        :key="pokemon.id"
+        class="box"
+        @click="initializeModal(pokemon.id)"
+      &gt;
+        &lt;img class="pokemon-image" :src="pokemon.image" alt="Pokemon image" /&gt;
+        &lt;figcaption class="pokemon-name"&gt;{{ pokemon.name }}&lt;/figcaption&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
     &lt;PokemonModal
       v-show="showModal"
       @close-modal="showModal = false"
-      :pokemon="pokemon"
+      :pokemon="pokemonData"
     /&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -172,21 +205,33 @@ import PokemonModal from "./PokemonModal.vue";
 import pokemonApi from "../gateways/pokemon.api";
 &nbsp;
 export default {
-  name: "PokemonComponent",
+  name: "PokedexComponent",
   data() {
     return {
-      pokemon: {},
+      pokemonList: {},
+      rows: [],
       showModal: false,
+      pokemonData: {},
     };
   },
   created() {
-    this.getPokemon();
+    this.getPokemonList();
   },
   methods: {
-    async getPokemon() {
-      this.pokemon = (
-        await pokemonApi.getOnePokemon(this.$route.query.search)
-      ).data;
+    async getPokemonList() {
+      this.pokemonList = (await pokemonApi.getPokemonList()).data;
+      this.groupColumns(this.pokemonList);
+    },
+    groupColumns(pokemonList) {
+      const POKEMONS_PER_ROW = 3;
+&nbsp;
+      for (let i = 0; i &lt; pokemonList.length; i += POKEMONS_PER_ROW) {
+        this.rows.push(pokemonList.slice(i, i + POKEMONS_PER_ROW));
+      }
+    },
+    async initializeModal(pokemonId) {
+      this.pokemonData = (await pokemonApi.getOnePokemon(pokemonId)).data;
+      this.showModal = true;
     },
   },
   components: { PokemonModal },
@@ -199,16 +244,16 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jul 06 2022 14:11:53 GMT-0300 (Brasilia Standard Time)
+                at Wed Jul 06 2022 13:52:50 GMT-0300 (Brasilia Standard Time)
             </div>
-        <script src="../prettify.js"></script>
+        <script src="prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
     </body>
 </html>
     

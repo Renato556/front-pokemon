@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Pokemon.vue</title>
+    <title>Code coverage report for views/AppView.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Pokemon.vue</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">views</a> AppView.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -37,9 +37,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
@@ -106,7 +106,16 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,49 +158,67 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;div class="pokemon"&gt;
-    &lt;div class="box" @click="showModal = true"&gt;
-      &lt;img
-        class="pokemon-image"
-        :src="pokemon.image"
-        alt="Pokemon não encontrado"
-      /&gt;
-      &lt;figcaption class="pokemon-name"&gt;{{ pokemon.name }}&lt;/figcaption&gt;
-    &lt;/div&gt;
-    &lt;PokemonModal
-      v-show="showModal"
-      @close-modal="showModal = false"
-      :pokemon="pokemon"
-    /&gt;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="fstat-no" title="function not covered" >&lt;template&gt;</span>
+  &lt;div class="home"&gt;
+    &lt;a href="/pokedex"&gt;&lt;img alt="Pokemon logo" src="../assets/logo.png" height="120px"&gt;&lt;/a&gt;
+    &lt;h1&gt;Pokedex VueJS&lt;/h1&gt;
+    &lt;SearchBar/&gt;
   &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import PokemonModal from "./PokemonModal.vue";
-import pokemonApi from "../gateways/pokemon.api";
+import SearchBar from '@/components/SearchBar.vue'
 &nbsp;
 export default {
-  name: "PokemonComponent",
-  data() {
-    return {
-      pokemon: {},
-      showModal: false,
-    };
-  },
-  created() {
-    this.getPokemon();
-  },
-  methods: {
-    async getPokemon() {
-      this.pokemon = (
-        await pokemonApi.getOnePokemon(this.$route.query.search)
-      ).data;
-    },
-  },
-  components: { PokemonModal },
-};
+  name: 'AppView',
+  components: {
+    SearchBar
+  }
+}
 &lt;/script&gt;
+&nbsp;
+&lt;style&gt;
+h1{
+  font-size: 3em;
+}
+.logo {
+  cursor: pointer;
+}
+body{
+  background-image: linear-gradient(to right, #e93418, #ed5415, 25%, #f79f2e, 75%, #ed5415, #e93418);
+}
+.pokemon{
+  margin: auto;
+  display: table;
+}
+.pokemon-image{
+  width: 13em;
+}
+.box{
+  height: 20em;
+  width: 20em;
+  background-color: white;
+  margin: 0.5em;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  filter: drop-shadow(0 0.5em 0.5rem rgba(0,0,0,0.5));
+  display: inline-block;
+}
+.pokemon-name{
+  color: black;
+  text-transform: capitalize;
+  font-size: 2em;
+}
+&lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

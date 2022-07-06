@@ -1,121 +1,132 @@
-import { shallowMount } from '@vue/test-utils'
-import PokemonModal from '@/components/PokemonModal.vue'
-import Pokedex from '@/components/Pokedex.vue'
-import pokemonApi from '@/gateways/pokemon.api'
+import { shallowMount } from "@vue/test-utils";
+import PokemonModal from "@/components/PokemonModal.vue";
+import Pokedex from "@/components/Pokedex.vue";
+import pokemonApi from "@/gateways/pokemon.api";
 
 const pokemonList = {
-    data: [
-        'pokemon1',
-        'pokemon2',
-        'pokemon3',
-        'pokemon4'
-    ]
-}
+  data: ["pokemon1", "pokemon2", "pokemon3", "pokemon4"],
+};
 const pokemon = {
-    data: 'pokemon'
-}
-jest.mock('@/gateways/pokemon.api', () => ({
-    getPokemonList: jest.fn().mockReturnValue(pokemonList),
-    getOnePokemon: jest.fn().mockReturnValue(pokemon)
-}))
+  data: "pokemon",
+};
+jest.mock("@/gateways/pokemon.api", () => ({
+  getPokemonList: jest.fn().mockReturnValue(pokemonList),
+  getOnePokemon: jest.fn().mockReturnValue(pokemon),
+}));
 
-const factory = propsData => shallowMount(Pokedex, {
+const factory = (propsData) =>
+  shallowMount(Pokedex, {
     propsData: {
-      ...propsData
-    }
-})
+      ...propsData,
+    },
+  });
 
-describe('Pokedex', () => {
-    let wrapper
+describe("Pokedex", () => {
+  let wrapper = factory();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    wrapper.destroy();
+  });
+
+  describe("When component initializes", () => {
+    const context = {
+      getPokemonList: jest.fn(),
+    };
 
     beforeEach(() => {
-        jest.clearAllMocks()
-    })
+      Pokedex.created.call(context);
+    });
 
-    afterAll(() => {
-        wrapper.destroy()
-    })
+    it("Then validate name", () => {
+      expect(Pokedex.name).toEqual("PokedexComponent");
+    });
 
-    describe('When component initializes', () => {
-        it('Then validate name', () => {
-            expect(Pokedex.name).toEqual('PokedexComponent')
-        })
+    it("Then import components", () => {
+      expect(Pokedex.components.PokemonModal).toEqual(PokemonModal);
+    });
 
-        it('Then import components', () => {
-            expect(Pokedex.components.PokemonModal).toEqual(PokemonModal)
-        })
+    it("Then initialize data", () => {
+      expect(Pokedex.data()).toEqual({
+        pokemonList: {},
+        rows: [],
+        showModal: false,
+        pokemonData: {},
+      });
+    });
 
-        it('Then initialize data', () => {
-            expect(Pokedex.data()).toEqual({
-                pokemonList: {},
-                rows: [],
-                showModal: false,
-                pokemonData: {}
-            })
-        })
-    })
+    it("Then initialize created", () => {
+      expect(context.getPokemonList).toHaveBeenCalled();
+    });
+  });
 
-    describe('When getPokemonList is called', () => {
-        const context = { 
-            pokemonList: {},
-            groupColumns: jest.fn()
-        }
+  describe("When getPokemonList is called", () => {
+    const context = {
+      pokemonList: {},
+      groupColumns: jest.fn(),
+    };
 
-        beforeEach(() => {
-            Pokedex.methods.getPokemonList.call(context)
-        })
+    beforeEach(() => {
+      Pokedex.methods.getPokemonList.call(context);
+    });
 
-        it('Then pokemonApi.getPokemonList is called', () => {
-            expect(pokemonApi.getPokemonList).toHaveBeenCalled()
-        })
+    it("Then pokemonApi.getPokemonList is called", () => {
+      expect(pokemonApi.getPokemonList).toHaveBeenCalled();
+    });
 
-        it('Then groupColumns is called', () => {
-            expect(context.groupColumns).toHaveBeenCalledWith(pokemonList.data)
-        })
+    it("Then groupColumns is called", () => {
+      expect(context.groupColumns).toHaveBeenCalledWith(pokemonList.data);
+    });
 
-        it('Then pokemonApi.getPokemonList returns pokemonList', () => {
-            expect(context.pokemonList).toEqual(pokemonList.data)
-        })
-    })
+    it("Then pokemonApi.getPokemonList returns pokemonList", () => {
+      expect(context.pokemonList).toEqual(pokemonList.data);
+    });
+  });
 
-    describe('When groupColumns is called', () => {
-        const expectedRows = [['pokemon1', 'pokemon2', 'pokemon3'], ['pokemon4']]
-        
-        beforeEach(() => {
-            wrapper = factory()
-        })
+  describe("When groupColumns is called", () => {
+    const expectedRows = [
+      ["pokemon1", "pokemon2", "pokemon3"],
+      ["pokemon4", "pokemon5", "pokemon6"],
+    ];
+    const pokemonRows = [
+      "pokemon1",
+      "pokemon2",
+      "pokemon3",
+      "pokemon4",
+      "pokemon5",
+      "pokemon6",
+    ];
 
-        afterAll(() => {
-            wrapper.destroy()
-        })
+    beforeEach(() => {
+      wrapper.vm.rows = [];
+      wrapper.vm.groupColumns(pokemonRows);
+    });
 
-        it('Then return an divided array in rows', () => {
-            expect(wrapper.vm.rows).toEqual(expectedRows)
-        })
-    })
+    it("Then return an divided array in rows", () => {
+      expect(wrapper.vm.rows).toEqual(expectedRows);
+    });
+  });
 
-    describe('When initializeModal is called', () => {
-        const mockPokemonId = 'mockId'
+  describe("When initializeModal is called", () => {
+    const mockPokemonId = "mockId";
 
-        beforeEach(async () => {
-            wrapper = factory()
-            await wrapper.vm.initializeModal(mockPokemonId)
-        })
+    beforeEach(async () => {
+      await wrapper.vm.initializeModal(mockPokemonId);
+    });
 
-        afterAll(() => {
-            wrapper.destroy()
-        })
+    it("Then pokemonApi.getOnePokemon is called", () => {
+      expect(pokemonApi.getOnePokemon).toHaveBeenCalledWith("mockId");
+    });
 
-        it('Then pokemonApi.getOnePokemon is called', () => {
-            expect(pokemonApi.getOnePokemon).toHaveBeenCalledWith('mockId')
-        })
+    it("Then pokemonApi.getOnePokemon returns pokemon", () => {
+      expect(wrapper.vm.pokemonData).toEqual(pokemon.data);
+    });
 
-        it('Then pokemonApi.getOnePokemon returns pokemon', () => {
-            expect(wrapper.vm.pokemonData).toEqual(pokemon.data)
-        })
-
-        it('Then showModal is true', () => {
-            expect(wrapper.vm.showModal).toEqual(true)
-        })
-    })
-})
+    it("Then showModal is true", () => {
+      expect(wrapper.vm.showModal).toEqual(true);
+    });
+  });
+});
